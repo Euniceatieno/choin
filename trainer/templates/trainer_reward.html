@@ -42,7 +42,7 @@
         {% for student in students %}
         <tr>
             <td>{{ student.username }} </td>
-            <td><button id="reward-student"><a href="{%url 'reward_confirm' student.id%}">Reward</a></button></td>
+            <td><button id="reward-student"><a href="{%url 'trainer_reward_confirm' student.id%}">Reward</a></button></td>
         </tr>
         {% endfor %}
     </table>

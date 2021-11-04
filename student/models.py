@@ -5,6 +5,7 @@ from django.db.models.deletion import CASCADE, SET_NULL
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from leadership.models import RedeemableItem
+
 # Create your models here.
 
 class Student(models.Model):
@@ -20,6 +21,20 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
             Student.objects.create(user=instance)
     else:
         pass
+
+
+class Wallet(models.Model):
+    owner = models.ForeignKey(Student,on_delete=CASCADE,null=True)
+    choinBalance = models.IntegerField(null=True)
+
+@receiver(post_save, sender=Wallet)
+def create_or_update_wallet(sender, instance, created, **kwargs):
+    if created:
+        Wallet.objects.create(owner=instance)
+    else:
+        pass
+
+
 
 class Redeem(models.Model):
     student=models.ForeignKey(Student,on_delete=CASCADE,null=True)

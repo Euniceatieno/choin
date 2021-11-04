@@ -57,6 +57,8 @@ class Transaction(models.Model):
     value = models.IntegerField()
     time =models.DateTimeField(auto_now_add=True,null=True)
 
+    
+
 class RedeemableItem(models.Model):
     image=models.ImageField(upload_to='rewards/')
     item_name=models.CharField(max_length=50)
@@ -66,5 +68,6 @@ class RedeemableItem(models.Model):
 
     def __str__(self) :
         return self.item_name
+
 
  

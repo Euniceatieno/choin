@@ -1,0 +1,16 @@
+{% for b in bal %}   
+    {{ b.choinBalance }}     
+{% endfor %}    
+
+
+<table>
+    {% for trans in transactions %}
+    <tr>
+        <td>{{ trans.sender}}</td>
+        <td>{{ trans.metric}}</td>
+        <td>{{ trans.value}}</td>
+        <td>{{ trans.time}}</td>
+
+    </tr>
+    {% endfor %}
+</table>

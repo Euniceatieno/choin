@@ -6,10 +6,10 @@ urlpatterns =[
     path('is_valid/', is_valid, name="is_valid"), #New
     path('connect_node/', connect_node, name="connect_node"), #New
     path('replace_chain/', replace_chain, name="replace_chain"), #New
-    path('reward/',reward,name='reward'),
-    path('reward_confirm/<int:id>/',reward_confirm,name='reward_confirm'),
-    path('trans/',trans,name='trans'),
-    path('search/',search_student,name='search_student'),
+    path('reward/',reward,name='trainer_reward'),
+    path('reward_confirm/<int:id>/',reward_confirm,name='trainer_reward_confirm'),
+    path('trans/',trans,name='trainer_trans'),
+    path('search/',search_student,name='trainer_search_student'),
     path('trainer-home/',trainer_home,name='trainer-home'),
     path('trainer-profile/',trainer_profile,name='trainer-profile'),
     ]

@@ -1,4 +1,5 @@
 import csv, io
+from django.dispatch.dispatcher import receiver
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.core.paginator import Paginator
@@ -18,6 +19,8 @@ from urllib.parse import urlparse
 from django.http import JsonResponse, HttpResponse, HttpRequest
 from django.views.decorators.csrf import csrf_exempt #New
 from django.db.models import Q
+from student.models import Wallet
+
 class Blockchain:
     def __init__(self):
         self.chain = []
@@ -321,6 +324,35 @@ def reward_confirm(request,id):
             value =the_transactions[3],
             time =the_transactions[4],)
             transaction.save()
+            print(transaction)
+
+       
+    transactions = Transaction.objects.all().filter(receiver = student.username)
+    choinBalance = sum(transactions.values_list('value', flat=True))
+    print(choinBalance)
+    
+    
+    stud = Student.objects.all().filter(user_id = student).first()
+    wallet=Wallet.objects.update_or_create(owner = stud  , choinBalance = choinBalance)
+    wallet.save()
+
+    # wallet = Wallet.objects.all()
+    
+    # for object in wallet:
+    #     if object.owner:
+    #         wallet.update(owner = Student.username , choinBalance = choinBalance)
+    #         print(wallet)
+    #         # wallet.save()
+
+
+    #     else:
+    #         wallet.create(owner = Student.username , choinBalance = choinBalance)
+    #         print(wallet)
+    #         wallet.save()    
+        
+      
+
+
     return render(request,'reward_confirm.html',{'student':student,'metrics':metrics,'met':met})
    
 

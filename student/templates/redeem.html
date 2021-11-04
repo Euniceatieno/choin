@@ -12,7 +12,12 @@
 
 <body style="margin-left: 18%;">
     <img src="http://cdn7.dissolve.com/p/D1307_90_007/D1307_90_007_0004_600.jpg" alt="" id="prof">
-    <h3 id="heading">Balance:20Choins</h3>
+    {% for b in bal %}
+     
+        <h3 id="heading">Balance:{{ b.choinBalance }}</h3>
+        
+    {% endfor %}
+    
     <h2 id="redeem">Redeems</h2>
     <!-- <div class="container">
         <main class="grid">
