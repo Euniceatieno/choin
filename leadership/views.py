@@ -19,7 +19,7 @@ from urllib.parse import urlparse
 from django.http import JsonResponse, HttpResponse, HttpRequest
 from django.views.decorators.csrf import csrf_exempt #New
 from django.db.models import Q
-from student.models import Wallet
+# from student.models import Wallet
 
 class Blockchain:
     def __init__(self):
@@ -330,25 +330,36 @@ def reward_confirm(request,id):
     transactions = Transaction.objects.all().filter(receiver = student.username)
     choinBalance = sum(transactions.values_list('value', flat=True))
     print(choinBalance)
+    print(student.id)
+    wallet_owner=User.objects.get(id=student.id)
+    # print(stu)
+    wallets=Wallet.objects.all().filter(owner=wallet_owner)
+    # if wallets.exists():
+    wallets.update(owner = wallet_owner, choinBalance = choinBalance)
     
-    
-    stud = Student.objects.all().filter(user_id = student).first()
-    wallet=Wallet.objects.update_or_create(owner = stud  , choinBalance = choinBalance)
-    wallet.save()
+    # else:
+    #     Wallet.objects.create(owner = wallet_owner, choinBalance = choinBalance)
 
-    # wallet = Wallet.objects.all()
-    
-    # for object in wallet:
+
+
+    # if wallet_owner:
+    #     Wallet.objects.update(owner = wallet_owner, choinBalance = choinBalance)
+    # else:
+    #     Wallet.objects.create(owner = wallet_owner, choinBalance = choinBalance)    
+
+    # print(wallet)
+    # wallets=Wallet.objects.all()
+    # for object in wallets:
     #     if object.owner:
-    #         wallet.update(owner = Student.username , choinBalance = choinBalance)
-    #         print(wallet)
-    #         # wallet.save()
+    #         wallets.update(owner =stu, choinBalance = choinBalance)
+    #         print(wallets)
+           
 
 
     #     else:
-    #         wallet.create(owner = Student.username , choinBalance = choinBalance)
-    #         print(wallet)
-    #         wallet.save()    
+    #         wallets.create(owner = stu , choinBalance = choinBalance)
+    #         print(wallets)
+    #         wallets.save()    
         
       
 

@@ -1,5 +1,8 @@
 from django.db import models
 from django.db.models.base import Model
+from django.db.models.deletion import CASCADE
+from django.db.models.signals import post_save
+from django.dispatch.dispatcher import receiver
 from .manager import CustomUserManager
 from django.contrib.auth.models import AbstractUser
 
@@ -50,6 +53,19 @@ class Metrics(models.Model):
         self.value
         super(Metrics, self).save()
         
+
+class Wallet(models.Model):
+    owner = models.ForeignKey(User,on_delete=CASCADE,null=True)
+    choinBalance = models.IntegerField(null=True)
+    
+# @receiver(post_save, sender=User)
+# def create_or_update_wallet_profile(sender, instance, created, **kwargs):
+#     if created:
+#             Wallet.objects.create(user=instance)
+#     else:
+#         Wallet.objects.update(user=instance)
+
+
 class Transaction(models.Model):
     receiver =models.CharField(max_length = 20)
     sender =models.EmailField()
