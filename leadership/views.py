@@ -345,7 +345,7 @@ def reward_confirm(request,id):
     # notify.send (request.user, recipient = student, verb ='You have been awarded choins ')
 
 
-    return render(request,'reward_confirm.html',{'student':student,'metrics':metrics,'met':met})
+    return render(request,'reward_confirm.html',{'student':student,'metrics':metrics,'met':met,'val':val})
    
 
 def delete_metric(request,id):

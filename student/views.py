@@ -74,7 +74,7 @@ def redeem_success(request):
         student_customer = Student.objects.get(user = request.user)
         order, created = Redeem.objects.get_or_create(student=student_customer, complete = False)
         items = order.rewardeditem_set.all()
-        print(items)
+      
     else:
         items= []
     context = {'items':items, 'order':order}  
@@ -84,12 +84,11 @@ def cart(request):
     bal = Wallet.objects.all().filter(owner = request.user)
     if request.user.is_authenticated:
         student_customer = Student.objects.get(user = request.user)
-        # student_customer = request.user.role==3
-        
+
         order, created = Redeem.objects.get_or_create(student=student_customer, complete = False)
         items = order.rewardeditem_set.all()
-        
-        # cartItems = order.calculate_cart_items()
+        print(items)
+     
     else:
         items= []
 
@@ -129,9 +128,6 @@ def update_item(request):
     productId = data['productId'] 
     action = data['action']
 
-    print('Action:', action)
-    print('ProductId:', productId) 
-
     student_customer = Student.objects.get(user = request.user)
     product = RedeemableItem.objects.get(id=productId)
     order, created = Redeem.objects.get_or_create(student=student_customer, complete = False)
@@ -170,7 +166,10 @@ def student_redeem(request):
                 
                 wallets.update(owner = request.user, choinBalance = the_balance)
 
-    return render(request,'RedeemSucceed.html',{'the_balance':the_balance,'order':order})        
+    return render(request,'RedeemSucceed.html',{'the_balance':the_balance,'order':order}) 
+
+def myItems(request):
+    return render(request,'my_items.html')         
 
 
 

@@ -22,7 +22,8 @@
         </ul>
         
              for {{ order.calculate_cart_total}}</div>
-        <button id="close">Ok</button>
+             <a href="{% url 'my_items' %}"><button id="close">Ok</button></a>
+      
     </div>
     <script src="{% static 'js/redeem.js' %}"></script>
 

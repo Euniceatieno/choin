@@ -21,7 +21,7 @@
         {%endfor%} {% for b in bal %}
         <h3>Current Balance: {{ b.choinBalance}}</h3>
         {% endfor %}
-        <button class="close">Ok</button>
+        <a href="{% url 'cart' %}"><button id="close">Ok</button></a>
     </div>
     <script src="{% static 'js/redeem.js' %}"></script>
 

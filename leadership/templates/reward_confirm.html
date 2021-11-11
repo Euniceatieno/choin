@@ -35,7 +35,10 @@
                 <form method="get" >
                     Metric
                     <select name='drop1' onchange="this.form.submit()">
-                        <option selected disabled="true">Select Metric</option>
+                        {% for v in val.values %}
+                        <option selected disabled="True">{{ v }}</option>
+                        {% endfor %}
+
                         {% for q in metrics %}
                         <option id="metric" type="text" name="metric" value="{{ q }}">
                         {{ q }}
